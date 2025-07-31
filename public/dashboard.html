@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Painel de Controlo</title>
+ 
+   <link rel="icon" type="image/png" href="/favicon.png">
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+  
+  <link rel="stylesheet" href="/style.css">
+  <script src="https://unpkg.com/feather-icons"></script>
+</head>
+<body>
+  <div class="container dashboard-container">
+    <header>
+      <h1><i data-feather="monitor"></i> Agente AI Whatsapp</h1>
+      <div class="header-controls">
+        <div class="theme-switch-wrapper">
+          <label class="theme-switch" for="theme-checkbox">
+            <input type="checkbox" id="theme-checkbox" />
+            <div class="slider round"></div>
+          </label>
+        </div>
+        <a href="/auth/logout" class="btn logout-btn">
+          <i data-feather="log-out"></i> Sair
+        </a>
+      </div>
+    </header>
+    
+    <main>
+      <div class="grid-container">
+        <div class="status-card">
+          <h3><i data-feather="activity"></i> Estado da Conexão</h3>
+          <div id="status-indicator" class="indicator initializing"></div>
+          <p id="status-message">Painel conectado. A carregar informações do bot...</p>
+          <p id="bot-id-display" class="bot-info"></p>
+        </div>
+        
+        <div class="qr-card">
+          <h3><i data-feather="grid"></i> QR Code</h3>
+          <div id="qr-code-wrapper">
+            <img id="qr-code-image" src="" alt="QR Code do WhatsApp aparecerá aqui">
+            <p id="qr-placeholder">Aguardando QR Code...</p>
+          </div>
+        </div>
+
+        <div class="control-card">
+          <h3><i data-feather="user-check"></i> Controle de Atendimento</h3>
+          <p class="control-description">Pausar o bot para um utilizador específico para permitir o atendimento humano.</p>
+          <div class="form-group">
+            <input type="text" id="user-number-input" placeholder="Ex: 5511999999999">
+          </div>
+          <div class="button-group">
+            <button id="pause-btn" class="btn action-btn"><i data-feather="pause-circle"></i> Pausar Bot</button>
+            <button id="resume-btn" class="btn resume-btn"><i data-feather="play-circle"></i> Reativar Bot</button>
+          </div>
+        </div>
+
+        <div class="queue-card">
+          <h3><i data-feather="users"></i> Fila de Atendimento</h3>
+          <ul id="paused-users-list">
+            <li class="empty-queue">A fila de atendimento está vazia.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="log-section">
+        <h3><i data-feather="list"></i> Log de Atividades</h3>
+        <ul id="log-list">
+        </ul>
+      </div>
+    </main>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+  
+  <script src="/client.js"></script>
+
+  <script>
+    feather.replace();
+  </script>
+</body>
+</html>

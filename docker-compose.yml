@@ -1,0 +1,26 @@
+version: "3.8"
+
+services:
+  redis:
+    image: redis:7
+    container_name: redis
+    restart: always
+    ports:
+      - "6379:6379"
+
+  whatsapp-bot:
+    build: .
+    container_name: whatsapp-bot
+    depends_on:
+      - redis
+    volumes:
+      - .:/app
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - OPENAI_ASSISTANT_ID=${OPENAI_ASSISTANT_ID}
+      - REDIS_URL=redis://redis:6379
+      - CONVERSATION_TTL_SECONDS=${CONVERSATION_TTL_SECONDS}
+      - BOT_RESPONSE_DELAY_SECONDS=${BOT_RESPONSE_DELAY_SECONDS}
+      - AI_AGENT_PROMPT=${AI_AGENT_PROMPT}
+    stdin_open: true
+    tty: true
